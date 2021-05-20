@@ -50,6 +50,13 @@ class Quiz extends React.Component {
         
         if (typeof(description) === 'undefined') {return (<div>carregando...</div>)}
 
+        const imgURL = this.props.quiz.imgURL
+        if (typeof(imgURL) !== 'undefined' && typeof(imgURL) !== null) {
+            return (
+                <div style={{backgroundImage: `url(${imgURL})`}}><h1 className="card-title text-center font-weight-bold py-4">{description}</h1></div>
+            )
+        }
+
         return(
             <h1 className="card-title text-center">{description}</h1>
         )
