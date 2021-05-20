@@ -10,7 +10,9 @@ Esta aplicação é a interface de usuário para interação com a API Quafundó
 
 2. Com o NodeJS instalado, clone este repositório usando o comando `git clone https://github.com/stephenfg92/quafundo_client.git`. Ou, faça o download do repositório utilizando o botão "Code" disponibilizado pelo GitHub.
 
-3. Utilizando o terminal de seu sistema, navegue até a pasta onde está o repositório e execute o comando `npm start`. O aplicativo será executado automaticamente.
+3. Utilizando o terminal de seu sistema, navegue até a pasta onde está o repositório e execute o comando `npm install` para instalar as dependências do projeto.
+
+4. Na mesma pasta, execute o comando `npm start` para iniciar a aplicação.
 
 ## Configuração padrão
 
