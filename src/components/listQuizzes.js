@@ -49,10 +49,16 @@ class ListQuizzes extends Component {
     render() {
 
         return (
-            <div>
-                <h1> Quizzes disponíveis </h1>
-                {this.quizList()}
-                {this.redirectToQuiz()}
+            <div className = "container-fluid">
+                <div className="Row">
+                    <div className="col-md-10 col-lg-8 mx-auto">
+                        <div className="text-center">
+                            <h1> Quizzes disponíveis </h1>
+                            {this.quizList()}
+                            {this.redirectToQuiz()}
+                        </div>
+                    </div>
+                </div>
             </div>
         )
 

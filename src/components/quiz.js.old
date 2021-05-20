@@ -12,7 +12,6 @@ class Quiz extends React.Component {
         this.shouldWarn = false
     }
 
-    // Envia as respostas para o servidor.
     onSubmit = async e => {
         e.preventDefault();
         this.resultCount = 0;
@@ -37,25 +36,22 @@ class Quiz extends React.Component {
 
     }
 
-    // Conforme o usuário seleciona alternativas, acumula dados para enviar ao servidor.
     handleChange = e => {
         const key = e.target.name.toString()
         const value = e.target.value.toString()
         this.data[key] = value
     }
 
-    // Apresenta a descrição do quiz.
     renderDescription() {
         const description = this.props.quiz.description
         
         if (typeof(description) === 'undefined') {return (<div>carregando...</div>)}
 
         return(
-            <h1 className="card-title text-center">{description}</h1>
+            <h1 className="card-title text-center" style={{backgroundColor: "lightblue"}}>{description}</h1>
         )
     }
 
-    // Apresenta cada uma das perguntas do quiz.
     renderQuestions() {
         const questions = this.props.quiz.perguntas
 
@@ -73,14 +69,13 @@ class Quiz extends React.Component {
         )
     }
 
-    // Apresenta as alternativas de cada questão
     renderAlternatives(questionId,alternatives) {
         return(
             <div>
                 {
                     alternatives.map( (alternative, index) => (
                         <div className="mb-3" key={index}>
-                            <h5> <input type="radio" name={questionId} value={alternative._id}  onChange={this.handleChange}></input> <span className="ml-2">{alternative.text} {this.renderResult(alternative._id)}</span></h5>
+                            <h5> <input type="radio" name={questionId} value={alternative._id}  onChange={this.handleChange}></input> {alternative.text} {this.renderResult(alternative._id)}</h5>
                         </div>
                     ))
                 }
@@ -88,7 +83,6 @@ class Quiz extends React.Component {
         )
     }
 
-    // Indica se o usuário acertou ou não determinada pergunta.
     renderResult(alternativeId) {
 
         const result = this.state.results[alternativeId]
@@ -96,33 +90,22 @@ class Quiz extends React.Component {
         
         if (result === true) {
             this.resultCount += 1;
-            return <i className="bi-check-circle-fill text-success ml-2" role="img" aria-label="acertou"></i>
+            return "Acertou!"
         }
         if (result === false) {
-            return <i className="bi-x-circle-fill text-danger ml-2" role="img" aria-label="errou"></i>
+            return "Errou!"
         }
 
     }
 
-    // Faz a contagem de acertos
     renderCount() {
 
         if (this.shouldWarn) { 
-            return (<span className="ml-2"> Você ainda não respondeu todas as perguntas!</span>)
+            return (<p> Você ainda não respondeu todas as perguntas! Revise suas respostas.</p>)
         }
 
         if (this.shouldCount) {
-            return (<span className="ml-2"> Você acertou {this.resultCount} de {this.questionCount} questões </span>)
-        }
-    }
-
-    // Apresnta o botão para envio das respostas ao servidor
-    renderButton() {
-        if (!this.shouldWarn) {
-            return <button className="btn btn-outline-primary">Enviar</button>
-        }
-        else {
-            return <button className="btn btn-outline-danger">Enviar</button>
+            return (<p> Você acertou {this.resultCount} de {this.questionCount} questões </p>)
         }
     }
 
@@ -136,8 +119,8 @@ class Quiz extends React.Component {
                             <form onSubmit={this.onSubmit}>
                                 <div>
                                     {this.renderQuestions()}
-                                        {this.renderButton()}
-                                        {this.renderCount()}
+                                    <button>Enviar</button>
+                                    {this.renderCount()}
                                 </div>
                             </form>
                         </div>
